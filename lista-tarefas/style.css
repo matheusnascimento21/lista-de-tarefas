@@ -1,0 +1,323 @@
+/* Remove margens e paddings padrão do navegador */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Variáveis de cores e tamanhos — mude aqui para alterar o tema inteiro */
+:root {
+  --bg:             #F7F5F0;
+  --surface:        #FFFFFF;
+  --borda:          #E2DDD6;
+  --borda-hover:    #C8C2B8;
+
+  --texto:          #1C1A17;
+  --texto-fraco:    #6B6760;
+  --texto-hint:     #A09D99;
+
+  --verde:          #3B6D11;
+  --verde-claro:    #EAF3DE;
+  --verde-medio:    #639922;
+
+  --vermelho:       #A32D2D;
+  --vermelho-claro: #FCEBEB;
+
+  --amarelo:        #854F0B;
+  --amarelo-claro:  #FAEEDA;
+
+  --radius:         12px;
+  --radius-sm:      8px;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--texto);
+  min-height: 100vh;
+  padding: 2rem 1rem 4rem;
+}
+
+.pagina {
+  max-width: 680px;
+  margin: 0 auto; /* centraliza na tela */
+}
+
+header {
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+header p {
+  font-size: 14px;
+  color: var(--texto-fraco);
+  margin-top: 4px;
+}
+
+.contadores {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.contador {
+  background: var(--surface);
+  border: 1px solid var(--borda);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--texto-fraco);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contador strong {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.contador.concluidas strong { color: var(--verde); }
+.contador.atrasadas  strong { color: var(--vermelho); }
+
+.formulario {
+  background: var(--surface);
+  border: 1px solid var(--borda);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formulario h2 {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--texto-fraco);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* Campos de texto e select */
+.formulario input[type="text"],
+.formulario input[type="date"],
+.formulario select {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--texto);
+  background: var(--bg);
+  border: 1px solid var(--borda);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.formulario input:focus,
+.formulario select:focus {
+  border-color: var(--verde-medio);
+}
+
+/* Linha com dois campos lado a lado */
+.linha {
+  display: flex;
+  gap: 10px;
+}
+
+.campo-data {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.campo-data label {
+  font-size: 12px;
+  color: var(--texto-fraco);
+}
+
+/* Botão de adicionar */
+#btn-adicionar {
+  padding: 10px;
+  background: var(--verde);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+#btn-adicionar:hover  { background: #27500A; }
+#btn-adicionar:active { transform: scale(0.99); }
+
+.filtros {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.filtro {
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--borda);
+  background: var(--surface);
+  color: var(--texto-fraco);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filtro:hover { border-color: var(--borda-hover); }
+
+.filtro.ativo {
+  background: var(--texto);
+  color: #fff;
+  border-color: var(--texto);
+}
+
+/* Remove o marcador padrão da lista */
+#lista-tarefas {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--borda);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: border-color 0.15s;
+}
+
+.card:hover { border-color: var(--borda-hover); }
+
+/* Borda vermelha à esquerda nas tarefas atrasadas */
+.card.atrasada { border-left: 3px solid var(--vermelho); }
+
+/* Tarefa concluída fica mais apagada */
+.card.concluida { opacity: 0.6; }
+.card.concluida .nome-tarefa {
+  text-decoration: line-through;
+  color: var(--texto-fraco);
+}
+
+/* Checkbox personalizado */
+.card input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid var(--borda);
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 2px;
+  display: grid;
+  place-items: center;
+  transition: all 0.15s;
+}
+
+.card input[type="checkbox"]:hover  { border-color: var(--verde-medio); }
+
+.card input[type="checkbox"]:checked {
+  background: var(--verde);
+  border-color: var(--verde);
+}
+
+.card input[type="checkbox"]:checked::after {
+  content: '';
+  width: 5px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) translateY(-1px);
+  display: block;
+}
+
+/* Corpo do card */
+.corpo-card { flex: 1; min-width: 0; }
+
+.nome-tarefa {
+  font-size: 15px;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Meta-infos abaixo do nome */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+  align-items: center;
+}
+
+/* Badge de prioridade */
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+}
+
+.badge.alta   { background: var(--vermelho-claro); color: var(--vermelho); }
+.badge.media  { background: var(--amarelo-claro);  color: var(--amarelo); }
+.badge.baixa  { background: var(--verde-claro);    color: var(--verde); }
+
+/* Datas */
+.data-info {
+  font-size: 12px;
+  color: var(--texto-hint);
+}
+
+.data-info.perto   { color: var(--amarelo); }
+.data-info.atrasou { color: var(--vermelho); }
+
+/* Botão de deletar */
+.btn-deletar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--texto-hint);
+  font-size: 18px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: background 0.12s, color 0.12s;
+  opacity: 0;
+}
+
+.card:hover .btn-deletar { opacity: 1; }
+.btn-deletar:hover {
+  background: var(--vermelho-claro);
+  color: var(--vermelho);
+}
+
+/* Mensagem de lista vazia */
+.vazio {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--texto-hint);
+  font-size: 14px;
+}
+

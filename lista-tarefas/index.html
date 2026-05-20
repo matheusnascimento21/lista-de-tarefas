@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Tarefas</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="pagina">
+
+    <!-- CABEÇALHO -->
+    <header>
+      <h1>Minhas tarefas</h1>
+      <p id="data-hoje"></p>
+    </header>
+
+    <!-- CONTADORES -->
+    <div class="contadores">
+      <div class="contador">
+        <strong id="total">0</strong>
+        <span>total</span>
+      </div>
+      <div class="contador concluidas">
+        <strong id="total-concluidas">0</strong>
+        <span>concluídas</span>
+      </div>
+      <div class="contador atrasadas">
+        <strong id="total-atrasadas">0</strong>
+        <span>atrasadas</span>
+      </div>
+    </div>
+
+    <!-- FORMULÁRIO -->
+    <section class="formulario">
+      <h2>Nova tarefa</h2>
+
+      <input
+        type="text"
+        id="input-nome"
+        placeholder="Nome da tarefa..."
+      />
+
+      <div class="linha">
+        <select id="input-prioridade">
+          <option value="media">Prioridade média</option>
+          <option value="alta">Prioridade alta</option>
+          <option value="baixa">Prioridade baixa</option>
+        </select>
+      </div>
+
+      <div class="linha">
+        <div class="campo-data">
+          <label for="input-data">Data da tarefa</label>
+          <input type="date" id="input-data" />
+        </div>
+        <div class="campo-data">
+          <label for="input-prazo">Prazo (até quando)</label>
+          <input type="date" id="input-prazo" />
+        </div>
+      </div>
+
+      <button id="btn-adicionar">+ Adicionar tarefa</button>
+    </section>
+
+    <!-- FILTROS -->
+    <div class="filtros">
+      <button class="filtro ativo" data-filtro="todas">Todas</button>
+      <button class="filtro" data-filtro="pendentes">Pendentes</button>
+      <button class="filtro" data-filtro="concluidas">Concluídas</button>
+      <button class="filtro" data-filtro="atrasadas">Atrasadas</button>
+    </div>
+
+    <!-- LISTA DE TAREFAS -->
+    <ul id="lista-tarefas"></ul>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
